@@ -5,9 +5,9 @@ set-rev:
 	git rev-parse --short HEAD > $(REV_FILE)
 
 images: set-rev
-	./deploy/images/make-image.sh deploy/images/app.Dockerfile "rotisserie-app:$$(cat $(REV_FILE))"
-	./deploy/images/make-image.sh deploy/images/ocr.Dockerfile "rotisserie-ocr:$$(cat $(REV_FILE))"
-	./deploy/images/make-image.sh deploy/images/static-server.Dockerfile "rotisserie-static:$$(cat $(REV_FILE))"
+	./make-image.sh app.Dockerfile "rotisserie-app:$$(cat $(REV_FILE))"
+	./make-image.sh ocr.Dockerfile "rotisserie-ocr:$$(cat $(REV_FILE))"
+	./make-image.sh static-server.Dockerfile "rotisserie-static:$$(cat $(REV_FILE))"
 
 tag-images: set-rev
 	sudo docker tag "rotisserie-app:$$(cat $(REV_FILE))" "$$docker_username/rotisserie-app:$$(cat $(REV_FILE))"
