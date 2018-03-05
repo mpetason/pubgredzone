@@ -1,6 +1,4 @@
-FROM nginx:1.13-alpine
-
-RUN apk add --no-cache bash
+FROM nginx:alpine
 
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 USER nginx
