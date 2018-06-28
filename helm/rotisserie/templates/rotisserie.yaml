@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ template "rotisserie.fullname" . }}-static
+  namespace: {{ .Values.namespace }}
   chart: {{ template "rotisserie.chart" . }}
   release: {{ .Release.Name }}
   heritage: {{ .Release.Service }}
@@ -26,6 +27,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ template "rotisserie.fullname" . }}-app
+  namespace: {{ .Values.namespace }}
   chart: {{ template "rotisserie.chart" . }}
   release: {{ .Release.Name }}
   heritage: {{ .Release.Service }}
@@ -60,6 +62,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ template "rotisserie.fullname" . }}-ocr
+  namespace: {{ .Values.namespace }}
   chart: {{ template "rotisserie.chart" . }}
   release: {{ .Release.Name }}
   heritage: {{ .Release.Service }}
@@ -79,6 +82,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ template "rotisserie.fullname" . }}-static
+  namespace: {{ .Values.namespace }}
   chart: {{ template "rotisserie.chart" . }}
   release: {{ .Release.Name }}
   heritage: {{ .Release.Service }}
@@ -94,6 +98,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ template "rotisserie.fullname" . }}-ocr
+  namespace: {{ .Values.namespace }}
   chart: {{ template "rotisserie.chart" . }}
   release: {{ .Release.Name }}
   heritage: {{ .Release.Service }}
@@ -109,6 +114,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ template "rotisserie.fullname" . }}-app
+  namespace: {{ .Values.namespace }}
   chart: {{ template "rotisserie.chart" . }}
   release: {{ .Release.Name }}
   heritage: {{ .Release.Service }}
@@ -125,7 +131,7 @@ apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
   name: {{ template "rotisserie.fullname" . }}-tls
-  namespace: default
+  namespace: {{ .Values.namespace }}
 spec:
   secretName: {{ template "rotisserie.fullname" . }}-tls
   issuerRef:
@@ -147,6 +153,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ template "rotisserie.fullname" . }}-ingress
+  namespace: {{ .Values.namespace }}
   chart: {{ template "rotisserie.chart" . }}
   release: {{ .Release.Name }}
   heritage: {{ .Release.Service }}
